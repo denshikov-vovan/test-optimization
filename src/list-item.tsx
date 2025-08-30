@@ -1,9 +1,11 @@
+import { memo } from "react";
+
 type Props = {
   value: string;
 };
 
-export const ListItem: React.FC<Props> = ({
-  value
+export const ListItem: React.FC<Props> = memo(({
+  value,
 }) => {
   console.log('ListItem render');
 
@@ -12,4 +14,4 @@ export const ListItem: React.FC<Props> = ({
       {value}
     </li>
   )
-}
+})
