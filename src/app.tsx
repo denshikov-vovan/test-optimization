@@ -4,10 +4,10 @@ import { ItemList } from "./item-list";
 import { ListItem } from "./list-item";
 import { Input, type InputRef } from "./input";
 
-type Item = { id: string; value: string };
+export type IItem = { id: string; value: string };
 
 export const App: React.FC = () => {
-  const [items, setItems] = useState<Item[]>([
+  const [items, setItems] = useState<IItem[]>([
     { id: '3dbbbb08-880f-4e61-b09d-56d2f602ff0b', value: 'Item 1' },
     { id: '1bb7d967-5788-4ae0-9bab-7225df0d652e', value: 'Item 2' },
     { id: '5ff36dff-ea8e-4550-9909-d823dbfce115', value: 'Item 3' },
