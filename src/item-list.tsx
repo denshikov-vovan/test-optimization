@@ -1,15 +1,16 @@
-type Props = {
-  children: React.ReactElement<HTMLLIElement>[];
-};
+import { useAppContext } from "./app-context";
+import { ListItem } from "./list-item";
 
-export const ItemList: React.FC<Props> = ({
-  children
-}) => {
+export const ItemList: React.FC = () => {
+  const { items } = useAppContext();
+
   console.log('ItemList render');
 
   return (
     <ul className=''>
-      {children}
+      {items.map(({ id, value}) => (
+          <ListItem key={id} value={value} />
+        ))}
     </ul>
   )
 }
