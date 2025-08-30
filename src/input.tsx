@@ -1,4 +1,8 @@
-type Props = React.InputHTMLAttributes<HTMLInputElement>;
+import type { Ref } from "react";
+
+type Props = React.InputHTMLAttributes<HTMLInputElement> & {
+  ref: Ref<HTMLInputElement>
+};
 
 export const Input: React.FC<Props> = (props) => {
   console.log('Input render');
