@@ -1,4 +1,4 @@
-import { forwardRef, useImperativeHandle, useState } from 'react';
+import { forwardRef, useImperativeHandle, useRef } from 'react';
 
 export type InputRef = {
   getValue: () => string;
@@ -8,23 +8,26 @@ export type InputRef = {
 type Props = React.InputHTMLAttributes<HTMLInputElement>;
 
 export const Input = forwardRef<InputRef, Props>((props, ref) => {
-  const [value, setValue] = useState('');
+  const innerRef = useRef<HTMLInputElement>(null);
 
   console.log('Input render');
 
   useImperativeHandle(ref, () => ({
-    getValue: () => value,
-    clear: () => setValue('')
+    getValue: () => innerRef.current?.value ?? '',
+    clear: () => {
+      if (innerRef.current) {
+        innerRef.current.value = '';
+      }
+    }
   }));
 
   return (
     <input
       {...props}
       id="item"
+      ref={innerRef}
       type="text"
       className="border border-black p-1"
-      value={value}
-      onChange={(e) => setValue(e.target.value)}
     />
   )
 });
