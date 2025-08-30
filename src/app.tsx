@@ -18,8 +18,9 @@ export const App: React.FC = () => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const onAddItem = useCallback(() => {
+    const newValue = inputRef.current!.value
     setItems(prevItems => [
-      { key: crypto.randomUUID(), value: inputRef.current!.value },
+      { key: crypto.randomUUID(), value: newValue },
       ...prevItems
     ]);
     inputRef.current!.value = "";
