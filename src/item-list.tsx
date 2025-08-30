@@ -9,8 +9,8 @@ export const ItemList: React.FC = () => {
   return (
     <ul className=''>
       {items.map(({ id, value}) => (
-          <ListItem key={id} value={value} />
-        ))}
+        <ListItem key={id} value={value} />
+      ))}
     </ul>
   )
 }
