@@ -1,4 +1,4 @@
-import { forwardRef, useImperativeHandle, useRef } from 'react';
+import { forwardRef, memo, useImperativeHandle, useRef } from 'react';
 
 export type InputRef = {
   getValue: () => string;
@@ -7,7 +7,7 @@ export type InputRef = {
 
 type Props = React.InputHTMLAttributes<HTMLInputElement>;
 
-export const Input = forwardRef<InputRef, Props>((props, ref) => {
+export const Input = memo(forwardRef<InputRef, Props>((props, ref) => {
   const innerRef = useRef<HTMLInputElement>(null);
 
   console.log('Input render');
@@ -30,4 +30,4 @@ export const Input = forwardRef<InputRef, Props>((props, ref) => {
       className="border border-black p-1"
     />
   )
-});
+}));
