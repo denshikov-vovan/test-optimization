@@ -1,33 +1,61 @@
-import { useState } from "react"
-import { Button } from "./button"
+import { useRef, useEffect } from "react";
+import { createRoot } from "react-dom/client";
+
+import { LIST } from "./constants";
+import type { IListItem } from "./types";
+
 import { ItemList } from "./item-list";
 import { ListItem } from "./list-item";
 import { Input } from "./input";
+import { Button } from "./button";
 
+const prependChild = (parent: HTMLUListElement, newFirstChild: HTMLLIElement) => {
+  parent.insertBefore(newFirstChild, parent.firstChild)
+}
 export const App: React.FC = () => {
-  const [items, setItems] = useState<string[]>(['Item 1', 'Item 2', 'Item 3'])
-  const [newItem, setNewItem] = useState<string>('')
+  const inputRef = useRef<HTMLInputElement>(null);
+  const listRef = useRef<HTMLUListElement>(null);
+  const itemsRef = useRef<IListItem[]>(LIST);
 
-  const onAddItem = () => {
-    setItems([newItem, ...items])
-    setNewItem('')
+  const addItem = (item: IListItem) => {
+    if (!listRef.current) return;
+
+    itemsRef.current.push(item);
+
+    const li = document.createElement("li");
+    prependChild(listRef.current, li);
+
+    createRoot(li).render(<ListItem value={item.name} />);
+    return <></>
+  };
+
+  const onClick = () => {
+    if (inputRef.current?.value) {
+      addItem({id: '', name: inputRef.current.value});
+      inputRef.current.value = "";
+    }
   }
 
-  console.log('App render');
+  useEffect(() => {
+    if (!listRef.current) return;
+
+    itemsRef.current.reverse().forEach((item) => addItem(item));
+    itemsRef.current = [];
+  }, []);
+
+
 
   return (
     <div className='w-full flex flex-col justify-center gap-6 p-6'>
       <div className='flex gap-3 items-center justify-center'>
-        <Input value={newItem} onChange={(e) => setNewItem(e.target.value)}/>
-        <Button onClick={onAddItem}>Add item</Button>
+        <Input ref={inputRef} />
+            
+        <Button onClick={onClick}>
+          Add item
+        </Button>
       </div>
 
-      <ItemList>
-        {items.map((item, index) => (
-          <ListItem key={index} value={item} />
-        ))}
-      </ItemList>
-
+      <ItemList ref={listRef} />
     </div>
-  )
+  );
 }

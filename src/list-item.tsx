@@ -8,8 +8,8 @@ export const ListItem: React.FC<Props> = ({
   console.log('ListItem render');
 
   return (
-    <li className='flex flex-col gap-2 items-center'>
+    <span className='flex flex-col gap-2 items-center'>
       {value}
-    </li>
+    </span>
   )
 }

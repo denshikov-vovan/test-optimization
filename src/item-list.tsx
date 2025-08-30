@@ -1,15 +1,11 @@
-type Props = {
-  children: React.ReactElement<HTMLLIElement>[];
-};
+import { forwardRef } from "react";
 
-export const ItemList: React.FC<Props> = ({
-  children
-}) => {
+export const ItemList = forwardRef<HTMLUListElement>((_, ref) => {
   console.log('ItemList render');
 
   return (
-    <ul className=''>
-      {children}
-    </ul>
-  )
-}
+  <ul 
+    className='' 
+    ref={ref}
+  ></ul>);
+});
