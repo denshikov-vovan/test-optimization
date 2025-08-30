@@ -1,8 +1,10 @@
+import { memo } from 'react';
+
 type Props = {
   children: React.ReactElement<HTMLLIElement>[];
 };
 
-export const ItemList: React.FC<Props> = ({
+export const ItemList: React.FC<Props> = memo(({
   children
 }) => {
   console.log('ItemList render');
@@ -12,4 +14,4 @@ export const ItemList: React.FC<Props> = ({
       {children}
     </ul>
   )
-}
+});
