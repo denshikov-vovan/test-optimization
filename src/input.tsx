@@ -1,10 +1,10 @@
-import { type Ref } from "react";
+import { memo, type Ref } from "react";
 
 type Props = React.InputHTMLAttributes<HTMLInputElement> & {
   inputRef: Ref<HTMLInputElement>
 };
 
-export const Input: React.FC<Props> = ({ inputRef, ...props}) => {
+export const Input: React.FC<Props> = memo<Props>(({ inputRef, ...props}) => {
   console.log('Input render');
 
   return (
@@ -16,4 +16,4 @@ export const Input: React.FC<Props> = ({ inputRef, ...props}) => {
       ref={inputRef}
     />
   )
-}
+})
