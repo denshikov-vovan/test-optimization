@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, type RefObject } from "react";
 
 export type IItem = {
   id: string;
@@ -7,7 +7,7 @@ export type IItem = {
 
 export type AppContext = {
   items: IItem[];
-  addItem: (item: string) => void;
+  addItem: RefObject<(item: string) => void>;
 }
 
 export const AppContext = createContext<AppContext | null>(null);

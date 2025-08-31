@@ -1,12 +1,12 @@
-import { useState, type PropsWithChildren } from "react"
+import { useRef, useState, type PropsWithChildren } from "react"
 import { AppContext, type IItem } from "./app-context"
 
 export const AppProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [items, setItems] = useState<IItem[]>(['Item 1', 'Item 2', 'Item 3'].map(formItem))
 
-  const addItem = (item: string) => {
+  const addItem = useRef((item: string) => {
     setItems([formItem(item), ...items])
-  }
+  })
 
   const context: AppContext = {
     items,

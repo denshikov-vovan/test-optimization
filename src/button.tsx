@@ -1,11 +1,9 @@
-import { memo } from "react";
-
 type Props = {
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   children: React.ReactNode;
 };
 
-export const Button: React.FC<Props> = memo<Props>(({
+export const Button: React.FC<Props> = ({
   onClick,
   children
 }) => {
@@ -16,4 +14,4 @@ export const Button: React.FC<Props> = memo<Props>(({
       {children}
     </button>
   )
-})
+}
